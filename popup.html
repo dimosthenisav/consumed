@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skroutz Life Price</title>
+  <link rel="stylesheet" href="popup.css">
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Consumed</h1>
+      <p class="subtitle">Now every price comes with a reality check</p>
+    </header>
+    <main>
+      <div class="form-group">
+        <label>Wage Type</label>
+        <div class="wage-type-toggle">
+          <label class="radio-label">
+            <input type="radio" name="wageType" value="hourly" checked>
+            <span class="radio-custom"></span>
+            Per Hour
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="wageType" value="monthly">
+            <span class="radio-custom"></span>
+            Per Month
+          </label>
+        </div>
+      </div>
+      <div class="form-group" id="hourlyWageGroup">
+        <label for="hourlyWage">Hourly Wage (€)</label>
+        <input 
+          type="number" 
+          id="hourlyWage" 
+          placeholder="e.g., 12.50" 
+          step="0.01" 
+          min="0"
+        >
+        <small>Your net hourly wage after taxes</small>
+      </div>
+      <div class="form-group" id="monthlyWageGroup" style="display: none;">
+        <label for="monthlyWage">Monthly Net Salary (€)</label>
+        <input 
+          type="number" 
+          id="monthlyWage" 
+          placeholder="e.g., 2000" 
+          step="0.01" 
+          min="0"
+        >
+        <small>Your net monthly salary after taxes</small>
+      </div>
+      <div class="form-group" id="workHoursGroup" style="display: none;">
+        <label for="workHoursPerMonth">Work Hours per Month</label>
+        <input 
+          type="number" 
+          id="workHoursPerMonth" 
+          placeholder="160" 
+          step="1" 
+          min="1"
+          value="160"
+        >
+        <small>Default: 160 hours (40h/week × 4 weeks)</small>
+      </div>
+
+      <div class="actions">
+        <button id="saveBtn" class="btn btn-primary">Save Settings</button>
+        <button id="optionsBtn" class="btn btn-secondary">Advanced Options</button>
+      </div>
+    </main>
+    <footer>
+      <div class="status" id="status"></div>
+      <div class="example" id="example">
+        <p>Example: A €50 item = <span id="exampleHours">0</span> hours of work</p>
+      </div>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html> 

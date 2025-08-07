@@ -1,0 +1,125 @@
+/* Consumed Extension Styles */
+
+.life-price-display {
+  display: inline-block;
+  font-family: inherit;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+  cursor: help;
+  position: relative;
+  color: #ffffff !important;
+  background-color: #007AFF;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-left: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.life-price-display:hover {
+  background-color: #0056CC !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+/* Remove bullet point styling since we're using a proper label */
+.life-price-display::before {
+  display: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .life-price-display {
+    font-size: 0.75em !important;
+    margin-left: 4px !important;
+    padding: 3px 6px !important;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .life-price-display {
+    background-color: #007AFF !important;
+    color: #ffffff !important;
+  }
+}
+
+/* Animation for new elements */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.life-price-display {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Ensure the display doesn't break layout and aligns properly with price */
+.price:has(.life-price-display),
+.product-price:has(.life-price-display),
+.price-range:has(.life-price-display),
+[class*="price"]:has(.life-price-display) {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  line-height: 1.4 !important;
+}
+
+/* Target common price containers */
+.price,
+.product-price,
+.price-range,
+.price-current,
+.price-new,
+.price-old,
+.price-value,
+.price-amount,
+.price-euro {
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+  line-height: 1.4 !important;
+}
+
+/* Ensure proper alignment for price text and our label */
+.price > *,
+.product-price > *,
+.price-range > *,
+.price-current > *,
+.price-new > *,
+.price-old > *,
+.price-value > *,
+.price-amount > *,
+.price-euro > * {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Specific handling for Skroutz price elements */
+[data-price],
+[class*="price"] {
+  display: inline-flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+}
+
+/* Ensure text nodes and our labels align properly */
+.price,
+.product-price,
+.price-range {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 4px !important;
+} 

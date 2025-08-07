@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Consumed",
+  "version": "1.0.0",
+  "description": "Transform prices into work hours! See how long you need to work to afford items on skroutz.gr. Make smarter purchasing decisions with this reality check extension.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://www.skroutz.gr/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://www.skroutz.gr/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Consumed"
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/timebgremover.png",
+    "48": "icons/timebgremover.png",
+    "128": "icons/timebgremover.png"
+  }
+} 

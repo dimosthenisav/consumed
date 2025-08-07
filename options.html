@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consumed - Options</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Consumed</h1>
+      <p class="subtitle">Settings & Customization</p>
+    </header>
+
+    <main>
+      <section class="settings-section">
+        <h2>Basic Settings</h2>
+        
+        <div class="form-group">
+          <label>Wage Type</label>
+          <div class="wage-type-toggle">
+            <label class="radio-label">
+              <input type="radio" name="wageType" value="hourly" checked>
+              <span class="radio-custom"></span>
+              Per Hour
+            </label>
+            <label class="radio-label">
+              <input type="radio" name="wageType" value="monthly">
+              <span class="radio-custom"></span>
+              Per Month
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group" id="hourlyWageGroup">
+          <label for="hourlyWage">Hourly Wage (€)</label>
+          <input 
+            type="number" 
+            id="hourlyWage" 
+            placeholder="e.g., 12.50" 
+            step="0.01" 
+            min="0"
+          >
+          <small>Your net hourly wage after taxes</small>
+        </div>
+
+        <div class="form-group" id="monthlyWageGroup" style="display: none;">
+          <label for="monthlyWage">Monthly Net Salary (€)</label>
+          <input 
+            type="number" 
+            id="monthlyWage" 
+            placeholder="e.g., 2000" 
+            step="0.01" 
+            min="0"
+          >
+          <small>Your net monthly salary after taxes</small>
+          
+          <label for="workHoursPerMonth" style="margin-top: 8px;">Work Hours per Month</label>
+          <input 
+            type="number" 
+            id="workHoursPerMonth" 
+            placeholder="160" 
+            step="1" 
+            min="1"
+            value="160"
+          >
+          <small>Default: 160 hours (40h/week × 4 weeks)</small>
+        </div>
+
+
+      </section>
+
+      <section class="settings-section">
+        <h2>Display Options</h2>
+        
+        <div class="form-group">
+          <label for="fontSize">Font Size</label>
+          <select id="fontSize">
+            <option value="0.75em">Small</option>
+            <option value="0.85em">Medium</option>
+            <option value="1em" selected>Large</option>
+          </select>
+          <small>Size of the life price text</small>
+        </div>
+
+        <div class="form-group">
+          <label for="displayFormat">Display Format</label>
+          <select id="displayFormat">
+            <option value="decimal">Decimal (e.g., 4.25 ώρες)</option>
+            <option value="fractional" selected>Fractional (e.g., 4h 15m)</option>
+            <option value="rounded">Rounded (e.g., 4 ώρες)</option>
+          </select>
+          <small>How to display the work hours</small>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="showBullet" checked>
+            <span class="checkmark"></span>
+            Show bullet point before text
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-section" style="display: none;">
+        <h2>Advanced Settings</h2>
+        
+        <div class="form-group">
+          <label for="customSelectors">Custom Price Selectors</label>
+          <textarea 
+            id="customSelectors" 
+            placeholder="Add custom CSS selectors for price detection (one per line)&#10;Example:&#10;.my-price-class&#10;[data-price-value]&#10;.product .price"
+            rows="4"
+          ></textarea>
+          <small>Add custom CSS selectors if price detection doesn't work properly</small>
+        </div>
+
+        <div class="form-group">
+          <label for="updateInterval">Update Interval (ms)</label>
+          <input 
+            type="number" 
+            id="updateInterval" 
+            placeholder="1000" 
+            min="100" 
+            max="10000"
+            step="100"
+          >
+          <small>How often to check for new prices (default: 1000ms)</small>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="debugMode">
+            <span class="checkmark"></span>
+            Enable debug mode
+          </label>
+          <small>Show console logs for troubleshooting</small>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <h2>Language & Localization</h2>
+        
+        <div class="form-group">
+          <label for="language">Language</label>
+          <select id="language">
+            <option value="el" selected>Ελληνικά (Greek)</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="currency">Currency</label>
+          <select id="currency">
+            <option value="EUR" selected>Euro (€)</option>
+            <option value="USD">US Dollar ($)</option>
+            <option value="GBP">British Pound (£)</option>
+          </select>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button id="saveBtn" class="btn btn-primary">Save All Settings</button>
+        <button id="resetBtn" class="btn btn-secondary">Reset to Defaults</button>
+      </div>
+    </main>
+
+    <footer>
+      <div class="status" id="status"></div>
+      <div class="preview" id="preview">
+        <h3>Preview</h3>
+        <p>€50 item = <span id="previewHours">0</span> hours of work</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html> 
