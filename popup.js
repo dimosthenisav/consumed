@@ -3,6 +3,7 @@
 class PopupManager {
   constructor() {
     this.elements = {
+      extensionToggle: document.getElementById('extensionToggle'),
       wageTypeHourly: document.querySelector('input[name="wageType"][value="hourly"]'),
       wageTypeMonthly: document.querySelector('input[name="wageType"][value="monthly"]'),
       hourlyWageGroup: document.getElementById('hourlyWageGroup'),
@@ -32,8 +33,12 @@ class PopupManager {
         'wageType',
         'hourlyWage',
         'monthlyWage',
-        'workHoursPerMonth'
+        'workHoursPerMonth',
+        'isEnabled'
       ]);
+      
+      // Set extension toggle state
+      this.elements.extensionToggle.checked = result.isEnabled !== false; // Default to true
       
       // Set wage type
       const wageType = result.wageType || 'hourly';
@@ -55,6 +60,12 @@ class PopupManager {
   }
 
   setupEventListeners() {
+    // Extension toggle
+    this.elements.extensionToggle.addEventListener('change', () => {
+      // Update example immediately when toggle changes
+      this.updateExample();
+    });
+    
     // Wage type toggle
     this.elements.wageTypeHourly.addEventListener('change', () => this.toggleWageInputs());
     this.elements.wageTypeMonthly.addEventListener('change', () => this.toggleWageInputs());
@@ -106,6 +117,7 @@ class PopupManager {
   }
 
   async saveSettings() {
+    const isEnabled = this.elements.extensionToggle.checked;
     const wageType = this.elements.wageTypeHourly.checked ? 'hourly' : 'monthly';
     const hourlyWage = parseFloat(this.elements.hourlyWage.value) || 0;
     const monthlyWage = parseFloat(this.elements.monthlyWage.value) || 0;
@@ -134,6 +146,7 @@ class PopupManager {
     const effectiveHourlyWage = this.getEffectiveHourlyWage();
     try {
       await chrome.storage.sync.set({
+        isEnabled,
         wageType,
         hourlyWage,
         monthlyWage,
@@ -147,7 +160,8 @@ class PopupManager {
         await chrome.tabs.sendMessage(tab.id, {
           action: 'updateSettings',
           settings: { 
-            hourlyWage: effectiveHourlyWage
+            hourlyWage: effectiveHourlyWage,
+            isEnabled: isEnabled
           }
         });
       }
@@ -164,7 +178,14 @@ class PopupManager {
   }
 
   updateExample() {
+    const isEnabled = this.elements.extensionToggle.checked;
     const effectiveHourlyWage = this.getEffectiveHourlyWage();
+    
+    if (!isEnabled) {
+      this.elements.exampleHours.textContent = 'disabled';
+      return;
+    }
+    
     // Always use just the time value without "ώρες"
     if (effectiveHourlyWage > 0) {
       const examplePrice = 50; // €50 example
