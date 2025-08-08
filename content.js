@@ -98,6 +98,12 @@ class SkroutzLifePrice {
   }
 
   processPriceElement(element) {
+    // Check if this element or its parent already has a life price display
+    if (element.querySelector('.life-price-display') || 
+        element.closest('[data-life-price-processed]')) {
+      return;
+    }
+
     const priceText = this.extractPrice(element);
     if (!priceText) return;
 
@@ -115,10 +121,17 @@ class SkroutzLifePrice {
     // Try to get price from various attributes and text content
     const priceText = element.textContent || element.innerText || '';
     
-    // Look for price patterns in Greek/European format
-    const priceMatch = priceText.match(/(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)\s*€?/);
+    // Look for price patterns in Greek/European format (including skroutz.gr format)
+    // Handle formats like: "18.940 00 €", "64,29 €", "64.29 €"
+    const priceMatch = priceText.match(/(\d{1,3}(?:\.\d{3})*(?:\s\d{2})?)\s*€?/);
     if (priceMatch) {
       return priceMatch[1];
+    }
+
+    // Also try alternative patterns for skroutz.gr
+    const altPriceMatch = priceText.match(/(\d+(?:[.,]\d{2})?)\s*€/);
+    if (altPriceMatch) {
+      return altPriceMatch[1];
     }
 
     // Also check data attributes
@@ -132,7 +145,9 @@ class SkroutzLifePrice {
 
   parsePrice(priceText) {
     // Handle Greek/European number format (1.234,56)
-    const cleanPrice = priceText.replace(/\./g, '').replace(',', '.');
+    // Also handle skroutz.gr format like "18.940 00" (space-separated)
+    let cleanPrice = priceText.replace(/\s+/g, ''); // Remove spaces
+    cleanPrice = cleanPrice.replace(/\./g, '').replace(',', '.'); // Handle decimal separators
     const price = parseFloat(cleanPrice);
     return isNaN(price) ? 0 : price;
   }
@@ -204,7 +219,12 @@ class SkroutzLifePrice {
       '[data-price]',
       '.price-value',
       '.price-amount',
-      '.price-euro'
+      '.price-euro',
+      // Additional selectors for skroutz.gr product pages
+      '[class*="price"]',
+      '[class*="Price"]',
+      '[class*="euro"]',
+      '[class*="€"]'
     ];
     
     // Add custom selectors if provided
