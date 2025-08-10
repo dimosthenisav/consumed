@@ -14,20 +14,8 @@
     "https://www.kotsovolos.gr/*",
     "https://www.mediamarkt.gr/*",
     "https://www.e-shop.gr/*",
-    "https://www.bestprice.gr/*",
-    "https://www.cosmote.gr/*",
-    "https://www.vodafone.gr/*",
-    "https://www.wind.gr/*",
-    "https://www.insomnia.gr/*",
-    "https://www.mymarket.gr/*",
-    "https://www.ab.gr/*",
     "https://www.sklavenitis.gr/*",
-    "https://www.lidl.gr/*",
-    "https://www.praktiker.gr/*",
-    "https://www.leroymerlin.gr/*",
-    "https://www.bauhaus.gr/*",
-    "https://www.hondoscenter.gr/*",
-    "https://www.notos.gr/*"
+    "https://www.praktiker.gr/*"
   ],
   "content_scripts": [
     {
@@ -38,20 +26,8 @@
         "https://www.kotsovolos.gr/*",
         "https://www.mediamarkt.gr/*",
         "https://www.e-shop.gr/*",
-        "https://www.bestprice.gr/*",
-        "https://www.cosmote.gr/*",
-        "https://www.vodafone.gr/*",
-        "https://www.wind.gr/*",
-        "https://www.insomnia.gr/*",
-        "https://www.mymarket.gr/*",
-        "https://www.ab.gr/*",
         "https://www.sklavenitis.gr/*",
-        "https://www.lidl.gr/*",
-        "https://www.praktiker.gr/*",
-        "https://www.leroymerlin.gr/*",
-        "https://www.bauhaus.gr/*",
-        "https://www.hondoscenter.gr/*",
-        "https://www.notos.gr/*"
+        "https://www.praktiker.gr/*"
       ],
       "js": ["content.js"],
       "css": ["styles.css"],

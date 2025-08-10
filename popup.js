@@ -160,9 +160,7 @@ class PopupManager {
         // Check if it's a supported Greek ecommerce site
         const supportedSites = [
           'skroutz.gr', 'public.gr', 'plaisio.gr', 'kotsovolos.gr', 'mediamarkt.gr',
-          'e-shop.gr', 'bestprice.gr', 'cosmote.gr', 'vodafone.gr', 'wind.gr',
-          'insomnia.gr', 'mymarket.gr', 'ab.gr', 'sklavenitis.gr', 'lidl.gr',
-          'praktiker.gr', 'leroymerlin.gr', 'bauhaus.gr', 'hondoscenter.gr', 'notos.gr'
+          'e-shop.gr', 'sklavenitis.gr', 'praktiker.gr'
         ];
         
         const isSupportedSite = supportedSites.some(site => tab.url.includes(site));
