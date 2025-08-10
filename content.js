@@ -5,7 +5,39 @@ class SkroutzLifePrice {
   constructor() {
     this.hourlyWage = 0;
     this.isEnabled = true;
-    this.priceSelectors = [
+    this.currentSite = this.detectCurrentSite();
+    this.priceSelectors = this.getSiteSpecificSelectors();
+    
+    this.init();
+  }
+
+  detectCurrentSite() {
+    const hostname = window.location.hostname;
+    if (hostname.includes('skroutz.gr')) return 'skroutz';
+    if (hostname.includes('public.gr')) return 'public';
+    if (hostname.includes('plaisio.gr')) return 'plaisio';
+    if (hostname.includes('kotsovolos.gr')) return 'kotsovolos';
+    if (hostname.includes('mediamarkt.gr')) return 'mediamarkt';
+    if (hostname.includes('e-shop.gr')) return 'eshop';
+    if (hostname.includes('bestprice.gr')) return 'bestprice';
+    if (hostname.includes('cosmote.gr')) return 'cosmote';
+    if (hostname.includes('vodafone.gr')) return 'vodafone';
+    if (hostname.includes('wind.gr')) return 'wind';
+    if (hostname.includes('insomnia.gr')) return 'insomnia';
+    if (hostname.includes('mymarket.gr')) return 'mymarket';
+    if (hostname.includes('ab.gr')) return 'ab';
+    if (hostname.includes('sklavenitis.gr')) return 'sklavenitis';
+    if (hostname.includes('lidl.gr')) return 'lidl';
+    if (hostname.includes('praktiker.gr')) return 'praktiker';
+    if (hostname.includes('leroymerlin.gr')) return 'leroymerlin';
+    if (hostname.includes('bauhaus.gr')) return 'bauhaus';
+    if (hostname.includes('hondoscenter.gr')) return 'hondoscenter';
+    if (hostname.includes('notos.gr')) return 'notos';
+    return 'generic';
+  }
+
+  getSiteSpecificSelectors() {
+    const baseSelectors = [
       '.price',
       '.product-price',
       '.price-range',
@@ -15,10 +47,238 @@ class SkroutzLifePrice {
       '[data-price]',
       '.price-value',
       '.price-amount',
-      '.price-euro'
+      '.price-euro',
+      '[class*="price"]',
+      '[class*="Price"]',
+      '[class*="euro"]',
+      '[class*="€"]'
     ];
-    
-    this.init();
+
+    const siteSelectors = {
+      skroutz: [
+        ...baseSelectors,
+        '.price-current',
+        '.price-range',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro'
+      ],
+      public: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '[data-testid*="price"]',
+        '.product-price-current'
+      ],
+      plaisio: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      kotsovolos: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      mediamarkt: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      eshop: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      bestprice: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      cosmote: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      vodafone: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      wind: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      insomnia: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      mymarket: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      ab: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      sklavenitis: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      lidl: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      praktiker: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      leroymerlin: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      bauhaus: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      hondoscenter: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      notos: [
+        ...baseSelectors,
+        '.product-price',
+        '.price-current',
+        '.price-new',
+        '.price-old',
+        '.price-value',
+        '.price-amount',
+        '.price-euro',
+        '.product-price-current'
+      ],
+      generic: baseSelectors
+    };
+
+    return siteSelectors[this.currentSite] || baseSelectors;
   }
 
   async init() {
@@ -134,6 +394,30 @@ class SkroutzLifePrice {
       return altPriceMatch[1];
     }
 
+    // Handle "από" (from) prices like "από 64,29 €"
+    const fromPriceMatch = priceText.match(/από\s+(\d+(?:[.,]\d{2})?)\s*€/);
+    if (fromPriceMatch) {
+      return fromPriceMatch[1];
+    }
+
+    // Handle "έως" (up to) prices like "έως 64,29 €"
+    const upToPriceMatch = priceText.match(/έως\s+(\d+(?:[.,]\d{2})?)\s*€/);
+    if (upToPriceMatch) {
+      return upToPriceMatch[1];
+    }
+
+    // Handle prices with "€" at the beginning like "€64,29"
+    const euroFirstMatch = priceText.match(/€\s*(\d+(?:[.,]\d{2})?)/);
+    if (euroFirstMatch) {
+      return euroFirstMatch[1];
+    }
+
+    // Handle prices with just numbers and euro symbol
+    const simplePriceMatch = priceText.match(/(\d+(?:[.,]\d{2})?)\s*€/);
+    if (simplePriceMatch) {
+      return simplePriceMatch[1];
+    }
+
     // Also check data attributes
     const dataPrice = element.dataset.price || element.getAttribute('data-price');
     if (dataPrice) {
@@ -208,24 +492,8 @@ class SkroutzLifePrice {
   }
 
   updatePriceSelectors() {
-    // Start with default selectors
-    this.priceSelectors = [
-      '.price',
-      '.product-price',
-      '.price-range',
-      '.price-current',
-      '.price-new',
-      '.price-old',
-      '[data-price]',
-      '.price-value',
-      '.price-amount',
-      '.price-euro',
-      // Additional selectors for skroutz.gr product pages
-      '[class*="price"]',
-      '[class*="Price"]',
-      '[class*="euro"]',
-      '[class*="€"]'
-    ];
+    // Get site-specific selectors
+    this.priceSelectors = this.getSiteSpecificSelectors();
     
     // Add custom selectors if provided
     if (this.customSelectors && this.customSelectors.trim()) {

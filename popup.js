@@ -156,14 +156,26 @@ class PopupManager {
 
       // Update content script
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-      if (tab && tab.url && tab.url.includes('skroutz.gr')) {
-        await chrome.tabs.sendMessage(tab.id, {
-          action: 'updateSettings',
-          settings: { 
-            hourlyWage: effectiveHourlyWage,
-            isEnabled: isEnabled
-          }
-        });
+      if (tab && tab.url) {
+        // Check if it's a supported Greek ecommerce site
+        const supportedSites = [
+          'skroutz.gr', 'public.gr', 'plaisio.gr', 'kotsovolos.gr', 'mediamarkt.gr',
+          'e-shop.gr', 'bestprice.gr', 'cosmote.gr', 'vodafone.gr', 'wind.gr',
+          'insomnia.gr', 'mymarket.gr', 'ab.gr', 'sklavenitis.gr', 'lidl.gr',
+          'praktiker.gr', 'leroymerlin.gr', 'bauhaus.gr', 'hondoscenter.gr', 'notos.gr'
+        ];
+        
+        const isSupportedSite = supportedSites.some(site => tab.url.includes(site));
+        
+        if (isSupportedSite) {
+          await chrome.tabs.sendMessage(tab.id, {
+            action: 'updateSettings',
+            settings: { 
+              hourlyWage: effectiveHourlyWage,
+              isEnabled: isEnabled
+            }
+          });
+        }
       }
 
       this.showStatus('Settings saved successfully!', 'success');
