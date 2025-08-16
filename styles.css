@@ -74,16 +74,15 @@
   line-height: 1.4 !important;
 }
 
-/* Target common price containers */
-.price,
-.product-price,
-.price-range,
-.price-current,
-.price-new,
-.price-old,
-.price-value,
-.price-amount,
-.price-euro {
+/* Target common price containers - EXCLUDE filters-price */
+.price:not(.filters-price *):not(.filters-price),
+.product-price:not(.filters-price *):not(.filters-price),
+.price-current:not(.filters-price *):not(.filters-price),
+.price-new:not(.filters-price *):not(.filters-price),
+.price-old:not(.filters-price *):not(.filters-price),
+.price-value:not(.filters-price *):not(.filters-price),
+.price-amount:not(.filters-price *):not(.filters-price),
+.price-euro:not(.filters-price *):not(.filters-price) {
   display: flex !important;
   align-items: center !important;
   flex-wrap: wrap !important;
@@ -91,33 +90,31 @@
   line-height: 1.4 !important;
 }
 
-/* Ensure proper alignment for price text and our label */
-.price > *,
-.product-price > *,
-.price-range > *,
-.price-current > *,
-.price-new > *,
-.price-old > *,
-.price-value > *,
-.price-amount > *,
-.price-euro > * {
+/* Ensure proper alignment for price text and our label - EXCLUDE filters-price */
+.price:not(.filters-price *):not(.filters-price) > *,
+.product-price:not(.filters-price *):not(.filters-price) > *,
+.price-current:not(.filters-price *):not(.filters-price) > *,
+.price-new:not(.filters-price *):not(.filters-price) > *,
+.price-old:not(.filters-price *):not(.filters-price) > *,
+.price-value:not(.filters-price *):not(.filters-price) > *,
+.price-amount:not(.filters-price *):not(.filters-price) > *,
+.price-euro:not(.filters-price *):not(.filters-price) > * {
   display: inline-flex !important;
   align-items: center !important;
 }
 
-/* Specific handling for Skroutz price elements */
-[data-price],
-[class*="price"] {
+/* Apply extension styling to all price elements EXCEPT filters-price */
+[data-price]:not(.filters-price *):not(.filters-price),
+[class*="price"]:not(.filters-price *):not(.filters-price) {
   display: inline-flex !important;
   align-items: center !important;
   flex-wrap: wrap !important;
   gap: 4px !important;
 }
 
-/* Ensure text nodes and our labels align properly */
-.price,
-.product-price,
-.price-range {
+/* Ensure text nodes and our labels align properly - EXCLUDE filters-price */
+.price:not(.filters-price *):not(.filters-price),
+.product-price:not(.filters-price *):not(.filters-price) {
   display: inline-flex !important;
   align-items: baseline !important;
   flex-wrap: wrap !important;

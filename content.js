@@ -28,25 +28,19 @@ class SkroutzLifePrice {
     const baseSelectors = [
       '.price',
       '.product-price',
-      '.price-range',
       '.price-current',
       '.price-new',
       '.price-old',
       '[data-price]',
       '.price-value',
       '.price-amount',
-      '.price-euro',
-      '[class*="price"]',
-      '[class*="Price"]',
-      '[class*="euro"]',
-      '[class*="€"]'
+      '.price-euro'
     ];
 
     const siteSelectors = {
       skroutz: [
         ...baseSelectors,
         '.price-current',
-        '.price-range',
         '.price-new',
         '.price-old',
         '.price-value',
@@ -206,33 +200,28 @@ class SkroutzLifePrice {
     });
   }
 
-  processPrices() {
+    processPrices() {
     if (!this.isEnabled || this.hourlyWage <= 0) return;
 
-    if (this.debugMode) {
-      console.log('Processing prices with selectors:', this.priceSelectors);
-    }
-
-    // First try with specific selectors
     this.priceSelectors.forEach(selector => {
       const priceElements = document.querySelectorAll(selector);
-      if (this.debugMode && priceElements.length > 0) {
-        console.log(`Found ${priceElements.length} elements with selector: ${selector}`);
-      }
       priceElements.forEach(element => {
         if (!element.dataset.lifePriceProcessed) {
           this.processPriceElement(element);
         }
       });
     });
-
-
   }
 
   processPriceElement(element) {
     // Check if this element or its parent already has a life price display
     if (element.querySelector('.life-price-display') || 
         element.closest('[data-life-price-processed]')) {
+      return;
+    }
+
+    // Skip if element is within .filters-price component
+    if (element.closest('.filters-price') !== null) {
       return;
     }
 
@@ -247,6 +236,60 @@ class SkroutzLifePrice {
 
     this.addLifePriceDisplay(element, hours);
     element.dataset.lifePriceProcessed = 'true';
+  }
+
+  isPriceRangeFilterElement(element) {
+    // Only check for the specific .filters-price component
+    return element.closest('.filters-price') !== null;
+  }
+
+  isFilterComponent(element) {
+    // Check if element is within a filter section
+    const filterSelectors = [
+      '.filters',
+      '.sidebar',
+      '.filter-section',
+      '.filter-container',
+      '.price-filter',
+      '.range-filter',
+      '[data-filter]',
+      '.filter-options'
+    ];
+    
+    // Check if element is in a filter section
+    const isInFilterSection = filterSelectors.some(selector => 
+      element.closest(selector) !== null
+    );
+    
+    // Specifically check for price range filter elements
+    const isPriceRangeFilter = element.closest('.price-range') !== null ||
+                               element.closest('[class*="price-range"]') !== null ||
+                               element.closest('[class*="price-filter"]') !== null;
+    
+    // Check if element contains filter-specific text
+    const filterTexts = ['από', 'έως', 'και άνω', 'περιοχή τιμών'];
+    const hasFilterText = filterTexts.some(text => 
+      element.textContent?.toLowerCase().includes(text.toLowerCase())
+    );
+    
+    // Check if it's in the left sidebar (where filters typically are)
+    const isInLeftSidebar = element.closest('.sidebar') !== null || 
+                           element.closest('.filters') !== null ||
+                           element.closest('[class*="filter"]') !== null;
+    
+    const isFilter = isInFilterSection || isPriceRangeFilter || (hasFilterText && isInLeftSidebar);
+    
+    // Debug logging
+    if (this.debugMode && isFilter) {
+      console.log('Skipping filter component:', element, 'Reason:', {
+        isInFilterSection,
+        isPriceRangeFilter,
+        hasFilterText,
+        isInLeftSidebar
+      });
+    }
+    
+    return isFilter;
   }
 
   extractPrice(element) {
