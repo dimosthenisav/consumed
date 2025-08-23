@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Consumed",
   "version": "1.0.0",
-  "description": "Transform prices into work hours! See how long you need to work to afford items on popular Greek ecommerce sites. Make smarter purchasing decisions with this reality check extension.",
+  "description": "Transform prices into work hours on Greek ecommerce sites. Make smarter purchasing decisions with this reality check extension.",
   "permissions": [
     "storage",
     "activeTab"
@@ -40,8 +40,8 @@
   },
   "options_page": "options.html",
   "icons": {
-    "16": "icons/timebgremover.png",
-    "48": "icons/timebgremover.png",
-    "128": "icons/timebgremover.png"
+    "16": "icons/consumedlogo.png",
+    "48": "icons/consumedlogo.png",
+    "128": "icons/consumedlogo.png"
   }
 } 

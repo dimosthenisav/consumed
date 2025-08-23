@@ -1,223 +1,255 @@
-# 🚀 Chrome Web Store Publishing Guide
-
-This guide will walk you through publishing your "Consumed" extension to the Chrome Web Store.
+# 🚀 Publishing Guide: Consumed Extension to Google Chrome Web Store
 
 ## 📋 Prerequisites
 
-1. **Google Developer Account**
-   - Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/)
-   - Sign in with your Google account
-   - Pay the one-time $5.00 registration fee (if not already done)
+### 1. **Google Developer Account**
+- Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/)
+- Sign in with your Google account
+- Pay the **one-time $5.00 USD registration fee** (required for all developers)
+- Complete the developer account setup
 
-2. **Extension Files Ready**
-   - All files are prepared and tested
-   - Icons are properly sized (16x16, 48x48, 128x128)
-   - Privacy policy is created
+### 2. **Extension Files Ready**
+- ✅ All extension files are in your repository
+- ✅ Extension is tested and working properly
+- ✅ No errors in Chrome DevTools
 
-## 📦 Prepare Your Extension Package
+## 📦 Step 1: Prepare Your Extension Package
 
-### 1. Create a ZIP File
+### 1.1 **Create Production Build**
 ```bash
-# Create a zip file with all your extension files
-zip -r consumed-extension.zip . -x "*.git*" "*.DS_Store*" "node_modules/*" "*.md" "PUBLISHING_GUIDE.md"
+# Make sure you're in the extension directory
+cd /path/to/your/consumed-extension
+
+# Create a clean production folder
+mkdir consumed-production
+cp -r * consumed-production/
+cd consumed-production
+
+# Remove development files (if any)
+rm -rf .git .gitignore node_modules package-lock.json
 ```
 
-**Include these files in your ZIP:**
-- manifest.json
-- content.js
-- popup.html, popup.js, popup.css
-- options.html, options.js, options.css
-- styles.css
-- icons/ (folder with all icon files)
-- privacy-policy.html
+### 1.2 **Verify Required Files**
+Ensure these files are present:
+- ✅ `manifest.json` (Manifest V3)
+- ✅ `popup.html` & `popup.js` & `popup.css`
+- ✅ `content.js`
+- ✅ `options.html` & `options.js` & `options.css`
+- ✅ `styles.css`
+- ✅ `icons/` folder with all icon sizes
+- ✅ `README.md`
+- ✅ `privacy-policy.html`
 
-### 2. Verify Your Package
-- Extract the ZIP file to a new folder
-- Load it as an unpacked extension in Chrome
-- Test all functionality thoroughly
-- Ensure no errors in the console
+### 1.3 **Create ZIP File**
+```bash
+# Create the ZIP file for upload
+zip -r consumed-extension-v1.0.0.zip . -x "*.DS_Store" "*.git*"
+```
 
-## 🏪 Chrome Web Store Submission
+## 🖼️ Step 2: Prepare Store Assets
 
-### Step 1: Access Developer Dashboard
+### 2.1 **Screenshots (Required)**
+Create screenshots showing your extension in action:
+- **Minimum**: 1 screenshot (1280x800 or 640x400)
+- **Recommended**: 3-5 screenshots
+- **Format**: PNG or JPEG
+- **Content**: Show extension working on different Greek ecommerce sites
+
+**Screenshot Ideas:**
+1. Extension popup with toggle and wage settings
+2. Price conversion on skroutz.gr product page
+3. Price conversion on public.gr listing page
+4. Extension working on mediamarkt.gr
+5. Options page with advanced settings
+
+### 2.2 **Promotional Images**
+- **Small Tile**: 440x280px (required)
+- **Large Tile**: 920x680px (required)
+- **Marquee**: 1400x560px (optional)
+
+### 2.3 **Icon**
+- **128x128px** (required)
+- Use your existing `icons/consumedlogo.png`
+
+## 📝 Step 3: Prepare Store Listing
+
+### 3.1 **Extension Details**
+
+**Name**: `Consumed - Price to Work Hours`
+
+**Short Description** (132 characters max):
+```
+Transform prices into work hours on Greek ecommerce sites
+```
+
+**Detailed Description**:
+```
+Consumed helps you make smarter purchasing decisions by showing how many hours you need to work to afford items on popular Greek ecommerce websites.
+
+🔍 **How it works:**
+• Set your hourly wage in the extension popup
+• Browse your favorite Greek online stores
+• See work hours next to every price automatically
+• Toggle the extension on/off with one click
+
+🛍️ **Supported Greek Ecommerce Sites:**
+• Skroutz.gr (price comparison)
+• Public.gr (electronics)
+• Plaisio.gr (electronics)
+• Kotsovolos.gr (electronics & appliances)
+• MediaMarkt.gr (electronics & appliances)
+• E-shop.gr (various categories)
+• Sklavenitis.gr (supermarket)
+• Praktiker.gr (home improvement)
+
+⚙️ **Features:**
+• Easy ON/OFF toggle
+• Support for hourly and monthly wages
+• Automatic calculation of effective hourly rate
+• Works on both listing and product pages
+• Clean, modern interface
+• No data collection or tracking
+
+💰 **Make Better Decisions:**
+Instead of seeing "€299" for a smartphone, see "24h 30m" of work needed. This reality check helps you make more informed purchasing decisions.
+
+Perfect for anyone who wants to be more mindful about their spending on Greek ecommerce sites!
+```
+
+### 3.2 **Category & Language**
+- **Category**: Productivity
+- **Language**: English
+- **Region**: Greece (primary), Worldwide
+
+### 3.3 **Privacy Policy**
+- **Privacy Policy URL**: Create a simple privacy policy page
+- **Data Usage**: "This extension does not collect, store, or transmit any personal data"
+
+## 🌐 Step 4: Create Privacy Policy
+
+### 4.1 **Simple Privacy Policy**
+Create a basic privacy policy stating:
+- No data collection
+- No personal information stored
+- No tracking
+- Local processing only
+- No third-party services
+
+### 4.2 **Host Privacy Policy**
+- Upload to GitHub Pages, or
+- Use a simple hosting service
+- Include the URL in your store listing
+
+## 📤 Step 5: Upload to Chrome Web Store
+
+### 5.1 **Access Developer Dashboard**
 1. Go to [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/)
 2. Click "Add new item"
 3. Upload your ZIP file
 
-### Step 2: Store Listing Information
+### 5.2 **Fill Store Listing**
+1. **Store listing** tab:
+   - Upload screenshots
+   - Add promotional images
+   - Fill description
+   - Set category and language
 
-#### **Extension Details**
-- **Name:** Consumed
-- **Summary:** Transform prices into work hours on skroutz.gr
-- **Detailed Description:**
-```
-Transform prices into work hours! See how long you need to work to afford items on skroutz.gr.
+2. **Privacy practices** tab:
+   - Add privacy policy URL
+   - Declare no data collection
+   - No personal information
 
-🎯 What it does:
-• Automatically detects prices on skroutz.gr
-• Shows work hours needed based on your hourly wage
-• Helps you make smarter purchasing decisions
-• Customizable display options
+3. **Package** tab:
+   - Upload your ZIP file
+   - Verify manifest.json is valid
 
-💰 Features:
-• Set your hourly wage (net after taxes)
-• Choose between hourly or monthly salary
-• Customize display format (decimal, fractional, rounded)
-• Personalize colors and text
-• Works with Greek/European price formats
+### 5.3 **Pricing & Distribution**
+- **Price**: Free
+- **Visibility**: Public
+- **Regions**: All regions (or specific to Greece)
 
-🔒 Privacy-focused:
-• No tracking or data collection
-• All settings stored locally
-• No external servers or third-party services
-• Compliant with GDPR and Chrome policies
+## 🔍 Step 6: Submit for Review
 
-Perfect for anyone who wants to understand the real "life cost" of their purchases!
-```
+### 6.1 **Pre-Submission Checklist**
+- [ ] All required fields filled
+- [ ] Screenshots uploaded
+- [ ] Privacy policy URL provided
+- [ ] ZIP file uploaded successfully
+- [ ] No errors in manifest.json
+- [ ] Extension tested thoroughly
 
-#### **Category & Language**
-- **Category:** Shopping
-- **Language:** English
-- **Country:** Greece (primary), Worldwide
+### 6.2 **Submit for Review**
+1. Click "Submit for review"
+2. Wait for Google's review process (typically 1-3 business days)
+3. Check email for status updates
 
-### Step 3: Graphics & Media
+## 📊 Step 7: Post-Publication
 
-#### **Required Images**
-1. **Icon (128x128):** Use your existing icon
-2. **Screenshot (1280x800):** Create a screenshot showing the extension in action on skroutz.gr
-3. **Promotional Images:**
-   - Small tile (440x280)
-   - Large tile (920x680)
+### 7.1 **Monitor Performance**
+- Check Chrome Web Store analytics
+- Monitor user reviews and ratings
+- Track installation numbers
 
-#### **Screenshot Guidelines**
-- Show the extension working on skroutz.gr
-- Display prices with work hours next to them
-- Include the popup interface
-- Use high-quality, clear images
-- Avoid showing personal information
+### 7.2 **User Support**
+- Respond to user reviews
+- Address bug reports
+- Consider user feedback for updates
 
-### Step 4: Privacy & Security
-
-#### **Privacy Policy**
-- **URL:** Host your privacy-policy.html on GitHub Pages or similar
-- **Content:** Already created in privacy-policy.html
-
-#### **Permissions Justification**
-```
-Storage: Stores your hourly wage and display preferences locally
-Active Tab: Accesses current tab to detect prices on skroutz.gr
-Host Permissions: Only accesses skroutz.gr to display work hours
-```
-
-### Step 5: Additional Information
-
-#### **Support Site**
-- Create a GitHub repository for support
-- Add issues template for bug reports
-- Include installation and usage instructions
-
-#### **Contact Information**
-- **Email:** [Your email]
-- **Support URL:** [GitHub repository URL]
-
-## 📝 Store Listing Optimization
-
-### Keywords for SEO
-- skroutz
-- price calculator
-- work hours
-- shopping assistant
-- budget tool
-- financial awareness
-- Greek shopping
-- price reality check
-
-### Description Tips
-- Use emojis for visual appeal
-- Highlight key benefits
-- Include use cases
-- Mention privacy features
-- Add call-to-action
-
-## 🔍 Review Process
-
-### What Google Reviews
-1. **Functionality:** Does it work as described?
-2. **Security:** Any malicious code or data collection?
-3. **Policy Compliance:** Follows Chrome Web Store policies
-4. **User Experience:** Clear interface and instructions
-5. **Privacy:** Proper privacy policy and data handling
-
-### Common Rejection Reasons
-- Missing privacy policy
-- Unclear permission usage
-- Broken functionality
-- Poor user experience
-- Policy violations
-
-### Review Timeline
-- **Initial Review:** 1-3 business days
-- **Re-review (if rejected):** 1-2 business days
-- **Final Approval:** Usually same day as approval
-
-## 🎯 Post-Publication
-
-### 1. Monitor Reviews
-- Respond to user feedback
-- Address bug reports quickly
-- Update based on user suggestions
-
-### 2. Analytics
-- Monitor installation numbers
-- Track user engagement
-- Analyze user feedback
-
-### 3. Updates
+### 7.3 **Updates**
 - Plan regular updates
-- Add new features based on feedback
-- Maintain compatibility with Chrome updates
+- Test thoroughly before publishing updates
+- Update version number in manifest.json
 
-## 📊 Marketing Your Extension
+## 🚨 Common Issues & Solutions
 
-### 1. Social Media
-- Share on Twitter, LinkedIn, Reddit
-- Create demo videos
-- Engage with relevant communities
+### **Manifest V3 Requirements**
+- Ensure manifest.json uses Manifest V3
+- Check all permissions are necessary
+- Verify content script matches are correct
 
-### 2. Content Marketing
-- Write blog posts about financial awareness
-- Create tutorials and guides
-- Share on Medium or personal blog
+### **Review Rejections**
+- **Privacy issues**: Ensure clear privacy policy
+- **Functionality**: Test on all supported sites
+- **Screenshots**: Show actual functionality
+- **Description**: Be clear about what the extension does
 
-### 3. Community Engagement
-- Share on Greek tech communities
-- Engage with skroutz.gr users
-- Participate in relevant forums
+### **Technical Issues**
+- **ZIP file**: Ensure all files are included
+- **Icons**: Verify all required icon sizes
+- **Permissions**: Only request necessary permissions
 
-## 🔧 Troubleshooting
+## 📈 Marketing Tips
 
-### Common Issues
-1. **Rejection due to permissions:** Clarify why each permission is needed
-2. **Privacy policy issues:** Ensure it covers all data handling
-3. **Functionality problems:** Test thoroughly before submission
-4. **Image quality:** Use high-resolution screenshots
+### **Store Optimization**
+- Use relevant keywords in description
+- High-quality screenshots
+- Clear, compelling description
+- Regular updates to stay relevant
 
-### Support Resources
-- [Chrome Web Store Developer Documentation](https://developer.chrome.com/docs/webstore/)
-- [Developer Program Policies](https://developer.chrome.com/docs/webstore/program_policies/)
-- [Chrome Extension Development Guide](https://developer.chrome.com/docs/extensions/)
+### **Promotion**
+- Share on social media
+- Greek tech communities
+- Personal finance blogs
+- Reddit communities (r/Greece, r/personalfinance)
 
-## 🎉 Success Checklist
+## 🔄 Update Process
 
-- [ ] Google Developer account created
-- [ ] $5 registration fee paid
-- [ ] Extension thoroughly tested
-- [ ] ZIP file created and verified
-- [ ] Privacy policy hosted online
-- [ ] Screenshots and promotional images created
-- [ ] Store listing information prepared
-- [ ] Support site/contact information ready
-- [ ] Extension submitted for review
-- [ ] Monitoring setup for post-publication
+### **For Future Updates**
+1. Update version in `manifest.json`
+2. Test thoroughly
+3. Create new ZIP file
+4. Upload to Chrome Web Store
+5. Submit for review
 
-Good luck with your Chrome Web Store submission! 🚀 
+---
+
+## 📞 Support
+
+If you encounter issues during the publishing process:
+- Check [Chrome Web Store Developer Documentation](https://developer.chrome.com/docs/webstore/)
+- Review [Chrome Web Store Program Policies](https://developer.chrome.com/docs/webstore/program_policies/)
+- Contact Chrome Web Store support if needed
+
+---
+
+**Good luck with your publication! 🚀** 

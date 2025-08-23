@@ -173,9 +173,9 @@ skroutz-life-price-extension/
 ├── options.css           # Options styles
 ├── styles.css            # Content script styles
 ├── icons/                # Extension icons
-│   ├── icon16.png
-│   ├── icon48.png
-│   └── icon128.png
+│   ├── consumedlogo.png
+│   ├── consumedlogo.png
+│   └── consumedlogo.png
 └── README.md             # This file
 ```
 
